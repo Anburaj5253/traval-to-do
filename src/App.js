@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{ useState } from 'react'
+import Header from './header';
+import Form from './form';
+import List from './list';
+import Stats from './footer';
 
-function App() {
+
+
+const App = () => {
+
+  const [items, setItems] = useState([]);
+  const [itemsData, setItemsData] = useState([]);
+  
+
+  const handleAddItems = (item) =>{
+    setItems((items)=> [...items, item]);
+    setItemsData((itemsData) =>[...items, item]);
+}
+  
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className = 'container'>
+    
+        <Header/>
+        <Form onAddItems = {handleAddItems}/>
+
+        <List 
+        items = {items} 
+        setItems = {setItems}
+        itemsData = {itemsData}
+        setItemsData = {setItemsData}/>
+
+        <Stats items = {items} />
+     
+        
     </div>
-  );
+  )
 }
 
 export default App;
